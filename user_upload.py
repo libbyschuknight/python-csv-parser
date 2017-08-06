@@ -36,9 +36,11 @@ with open('users.csv', 'rb') as csvfile:
     users_reader = csv.DictReader(csvfile)
     for row in users_reader:
 
-        name = row['name'].strip().title().replace('!', '')
-        surname = row['surname'].strip().title().replace('!', '')
-        email_address = row['email\t'].strip().lower()
+        name = row['name'].strip().title().replace('!', '').replace("'","''")
+        surname = row['surname'].strip().title().replace('!', '').replace("'","''")
+        email_address = row['email\t'].strip().lower().replace("'", "''")
+
+        print (name, surname, email_address)
 
         validate_email_address(email_address)
 
