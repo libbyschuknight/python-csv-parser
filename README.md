@@ -52,3 +52,9 @@ create user testuser;
 
 grant all on TESTDB.* to 'testuser'@'localhost' identified by 'test123';
 ```
+
+### To run script
+
+`python user_upload.py`
+
+My set up meant I was using `python2` instead of `python`.

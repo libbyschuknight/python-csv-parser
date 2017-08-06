@@ -14,8 +14,16 @@ def validate_email_address(email):
         return False
 
 
+def format_name(name):
+    ''' Strip whitepsace, make title case, replace any '!', and escape apostrophes'''
+    return name.strip().title().replace('!', '').replace("'","''")
 
-# ----------
+def format_email(email):
+    '''Strip any whitepsace, make lowercase and escape aspostrophes'''
+    return email.strip().lower().replace("'", "''")
+
+
+
 # Open database connection
 db = MySQLdb.connect("localhost","testuser","test123","TESTDB" )
 
@@ -33,20 +41,13 @@ create_table = """CREATE TABLE USER (
 
 cursor.execute(create_table)
 
-#----------------
-
 with open('users.csv', 'rb') as csvfile:
     users_reader = csv.DictReader(csvfile)
     for row in users_reader:
-
-        name = row['name'].strip().title().replace('!', '').replace("'","''")
-        surname = row['surname'].strip().title().replace('!', '').replace("'","''")
-        email_address = row['email\t'].strip().lower().replace("'", "''")
-
-        print (name, surname, email_address)
-
+        name = format_name(row['name'])
+        surname = format_name(row['surname'])
+        email_address = format_email(row['email\t'])
         email_check = validate_email_address(email_address)
-
 
         if email_check == True:
             # Prepare SQL query to INSERT a record into the database.
