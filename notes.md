@@ -23,7 +23,7 @@
   - put into methods - made some small methods
 
 - script command line directives
-  - --file[csv file name] – this is the name of the CSV to be parsed
+  - ~~--file[csv file name] – this is the name of the CSV to be parsed~~
   - --create_table – this will cause the MySQL users table to be built (and no further action on will be taken)
   - --dry_run – this will be used with the -- file directive in the instance that we want to run the script but not insert into the DB. All other functions will be executed, but the database won't be altered.
   - -u – MySQL username
