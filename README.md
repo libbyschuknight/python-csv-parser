@@ -31,6 +31,10 @@ For email validation have used the python-email-validator -  https://github.com/
 
 Install with  `pip2 install email_validator`
 
+Have used `MySQLdb`, to install:
+
+`pip install MySQL-python` or `pip2 install MySQL-python` for `Python2`
+
 
 ### Database
 Having major issues with this as in the past have played around with SilverStripe and Django stuff and think this is causing weird issues.
