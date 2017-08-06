@@ -1,6 +1,13 @@
 import csv
 import sys
 import MySQLdb
+import argparse
+
+parser = argparse.ArgumentParser()
+
+parser.add_argument("--file", help="increase output verbosity")
+args = parser.parse_args()
+filename = args.file
 
 def validate_email_address(email):
     from email_validator import validate_email, EmailNotValidError
@@ -13,7 +20,6 @@ def validate_email_address(email):
         sys.stdout.write(str(email + ' ' + str(e)) + '\n')
         return False
 
-
 def format_name(name):
     ''' Strip whitepsace, make title case, replace any '!', and escape apostrophes'''
     return name.strip().title().replace('!', '').replace("'","''")
@@ -22,7 +28,7 @@ def format_email(email):
     '''Strip any whitepsace, make lowercase and escape aspostrophes'''
     return email.strip().lower().replace("'", "''")
 
-def perform_database():
+def perform_database(filename):
     '''Open db connection, drop table, create new table, open csv, parse csv data, validate emails, insert data into table, close db'''
     db = MySQLdb.connect("localhost","testuser","test123","TESTDB" )
     cursor = db.cursor()
@@ -31,7 +37,7 @@ def perform_database():
     create_table = """CREATE TABLE USER (NAME  CHAR(20) NOT NULL, SURNAME  CHAR(20), EMAIL CHAR(20))"""
     cursor.execute(create_table)
 
-    with open('users.csv', 'rb') as csvfile:
+    with open(filename, 'rb') as csvfile:
         users_reader = csv.DictReader(csvfile)
         for row in users_reader:
             name = format_name(row['name'])
@@ -59,4 +65,4 @@ def perform_database():
 
 
 
-perform_database()
+perform_database(filename)
