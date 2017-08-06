@@ -5,7 +5,7 @@ import argparse
 
 parser = argparse.ArgumentParser()
 
-parser.add_argument("--file", help="increase output verbosity")
+parser.add_argument("--file", help="takes in file to be parsed")
 args = parser.parse_args()
 filename = args.file
 
