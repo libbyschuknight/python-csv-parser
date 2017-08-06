@@ -13,37 +13,30 @@ cursor.execute("DROP TABLE IF EXISTS USER")
 
 # Create table as per requirement
 create_table = """CREATE TABLE USER (
-         FIRST_NAME  CHAR(20) NOT NULL,
-         LAST_NAME  CHAR(20),
-         AGE INT,
-         SEX CHAR(1),
-         INCOME FLOAT )"""
+         NAME  CHAR(20) NOT NULL,
+         SURNAME  CHAR(20),
+         EMAIL CHAR(20))"""
 
 cursor.execute(create_table)
 
 name = 'Libby'
 surname = 'Knight'
-age = 40
-sex = 'F'
-year = 2000
+email = "test"
 
 
 # Prepare SQL query to INSERT a record into the database.
-sql = "INSERT INTO USER(FIRST_NAME, \
-       LAST_NAME, AGE, SEX, INCOME) \
-       VALUES ('%s', '%s', '%d', '%c', '%d' )" % \
-       (name, surname, age, sex, year)
-# try:
+sql = "INSERT INTO USER(NAME, \
+       SURNAME, EMAIL) \
+       VALUES ('%s', '%s', '%s' )" % \
+       (name, surname, email)
+try:
    # Execute the SQL command
-cursor.execute(sql)
+   cursor.execute(sql)
    # Commit your changes in the database
-db.commit()
-# except:
+   db.commit()
+except:
    # Rollback in case there is any error
-   # db.rollback()
-
-# cursor.execute(sql)
-
+   db.rollback()
 
 # disconnect from server
 db.close()

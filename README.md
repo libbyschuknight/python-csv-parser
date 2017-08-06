@@ -33,3 +33,22 @@ database = TESTDB
 user = testuser
 password = test123
 ```
+
+To access, get into mysql with
+```bash
+mysql -u root -p
+```
+
+To set up database, user and grant permissions:
+
+```sql
+create database TESTDB;
+
+show databases;
+
+use TESTDB;
+
+create user testuser;
+
+grant all on TESTDB.* to 'testuser'@'localhost' identified by 'test123';
+```

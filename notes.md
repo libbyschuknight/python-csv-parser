@@ -11,12 +11,13 @@
     - if invalid, do not insert, error message to STDOUT
 
 - add database stuff to file & add csv file to db
-  - connect
-  - table
+  - ~~connect~~
+  - ~~table~~
   - insert
   - execute
   - commit
   - close
+
 
 - script command line directives
 
