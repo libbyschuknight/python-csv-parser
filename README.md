@@ -5,7 +5,9 @@ My attempt at the Catalyst Python script task.
 ### Note:
 
 I don't know much Python, I am a Ruby/Rails developer. 😜
+
 I have worked hard on this and have decided to stop now (6pm Sunday night) at getting the first directive working (`--file`).
+
 I am pretty pleased with what I have done considering I don't really now Python and have never written a python script like this. 😁
 
 I don't know much about Ubuntu so not sure if it will run on that. Hope it does!
