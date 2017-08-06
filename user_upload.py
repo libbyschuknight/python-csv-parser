@@ -8,19 +8,50 @@ db = MySQLdb.connect("localhost","testuser","test123","TESTDB" )
 # prepare a cursor object using cursor() method
 cursor = db.cursor()
 
-# execute SQL query using execute() method.
-cursor.execute("SELECT VERSION()")
+# Drop table if it already exist using execute() method.
+cursor.execute("DROP TABLE IF EXISTS USER")
 
-# Fetch a single row using fetchone() method.
-data = cursor.fetchone()
+# Create table as per requirement
+create_table = """CREATE TABLE USER (
+         FIRST_NAME  CHAR(20) NOT NULL,
+         LAST_NAME  CHAR(20),
+         AGE INT,
+         SEX CHAR(1),
+         INCOME FLOAT )"""
 
-print "Database version : %s " % data
+cursor.execute(create_table)
+
+name = 'Libby'
+surname = 'Knight'
+age = 40
+sex = 'F'
+year = 2000
+
+
+# Prepare SQL query to INSERT a record into the database.
+sql = "INSERT INTO USER(FIRST_NAME, \
+       LAST_NAME, AGE, SEX, INCOME) \
+       VALUES ('%s', '%s', '%d', '%c', '%d' )" % \
+       (name, surname, age, sex, year)
+# try:
+   # Execute the SQL command
+cursor.execute(sql)
+   # Commit your changes in the database
+db.commit()
+# except:
+   # Rollback in case there is any error
+   # db.rollback()
+
+# cursor.execute(sql)
+
 
 # disconnect from server
 db.close()
 
 
 
+
+# --------------------------------------------------------
 def validate_email_address(email):
     from email_validator import validate_email, EmailNotValidError
 
