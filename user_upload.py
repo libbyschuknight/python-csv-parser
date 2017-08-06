@@ -7,9 +7,12 @@ def validate_email_address(email):
     try:
         v = validate_email(email_address, allow_smtputf8=False) # validate and get info
         email = v["email"] # replace with normalized form
+        return True
     except EmailNotValidError as e:
         # email is not valid, exception message is human-readable
         sys.stdout.write(str(email + ' ' + str(e)) + '\n')
+        return False
+
 
 
 # ----------
@@ -42,23 +45,23 @@ with open('users.csv', 'rb') as csvfile:
 
         print (name, surname, email_address)
 
-        validate_email_address(email_address)
-
-        # Prepare SQL query to INSERT a record into the database.
-        sql = "INSERT INTO USER(NAME, \
-               SURNAME, EMAIL) \
-               VALUES ('%s', '%s', '%s' )" % \
-               (name, surname, email_address)
-        try:
-           # Execute the SQL command
-           cursor.execute(sql)
-           # Commit your changes in the database
-           db.commit()
-        except:
-           # Rollback in case there is any error
-           db.rollback()
+        email_check = validate_email_address(email_address)
 
 
+        if email_check == True:
+            # Prepare SQL query to INSERT a record into the database.
+            sql = "INSERT INTO USER(NAME, \
+                   SURNAME, EMAIL) \
+                   VALUES ('%s', '%s', '%s' )" % \
+                   (name, surname, email_address)
+            try:
+               # Execute the SQL command
+               cursor.execute(sql)
+               # Commit your changes in the database
+               db.commit()
+            except:
+               # Rollback in case there is any error
+               db.rollback()
 
 # disconnect from server
 db.close()

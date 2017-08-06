@@ -13,10 +13,10 @@
 - add database stuff to file & add csv file to db
   - ~~connect~~
   - ~~table~~
-  - insert
-  - execute
-  - commit
-  - close
+  - ~~insert~~
+  - ~~execute~~
+  - ~~commit~~
+  - ~~close~~
 
 
 - script command line directives
