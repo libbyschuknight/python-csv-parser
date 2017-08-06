@@ -1,12 +1,26 @@
 
-
-# import csv file
 import csv
+
+def validate_email_address(email):
+    from email_validator import validate_email, EmailNotValidError
+
+
+    try:
+        v = validate_email(email_address, allow_smtputf8=False) # validate and get info
+        email = v["email"] # replace with normalized form
+    except EmailNotValidError as e:
+        # email is not valid, exception message is human-readable
+        print email, str(e)
+
 
 with open('users.csv', 'rb') as csvfile:
     users_reader = csv.DictReader(csvfile)
     for row in users_reader:
+
         name = row['name'].strip().title().replace('!', '')
         surname = row['surname'].strip().title().replace('!', '')
         email_address = row['email\t'].strip().lower()
-        print (name, surname, email_address)
+
+        print name, surname, email_address
+2
+        validate_email_address(email_address)
