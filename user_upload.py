@@ -1,5 +1,6 @@
 
 import csv
+import sys
 
 def validate_email_address(email):
     from email_validator import validate_email, EmailNotValidError
@@ -10,7 +11,7 @@ def validate_email_address(email):
         email = v["email"] # replace with normalized form
     except EmailNotValidError as e:
         # email is not valid, exception message is human-readable
-        print email, str(e)
+        sys.stdout.write(str(email + ' ' + str(e)) + '\n')
 
 
 with open('users.csv', 'rb') as csvfile:
@@ -22,5 +23,5 @@ with open('users.csv', 'rb') as csvfile:
         email_address = row['email\t'].strip().lower()
 
         print name, surname, email_address
-2
+
         validate_email_address(email_address)
